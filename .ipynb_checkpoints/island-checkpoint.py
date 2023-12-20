@@ -3,10 +3,10 @@ from langchain.chat_models import ChatOpenAI
 from langchain.schema import ChatMessage
 from langchain.schema.messages import SystemMessage
 import streamlit as st
-from dotenv import load_dotenv
-import os
+#from dotenv import load_dotenv
+#import os
 
-load_dotenv(dotenv_path='key.env')
+#load_dotenv(dotenv_path='key.env')
 
 
 def img_to_html(image_path):
@@ -19,7 +19,8 @@ hide_menu_style = """ <style> #MainMenu {visibility: hidden;} </style> """
 st.markdown( f"<div style='position: fixed; bottom: {16}px; right: 20px; font-size: {16}px;'> <b>Powered by</b> ISmeden islandrejser </div>", unsafe_allow_html=True) 
 st.image("island2.png")
 
-openai_api_key = os.getenv('OPENAI_API_KEY')
+#openai_api_key = os.getenv('OPENAI_API_KEY')
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 def set_northern_lights_background():
     st.markdown("""
