@@ -48,6 +48,11 @@ st.markdown("""
 
 # Add a slider for vacation duration
 vacation_duration = st.slider("Hvor mange dage vil du afsted?", 1, 7, 7)
+# Vælg om det skal være fast eller ej
+accommodation_choice = st.radio(
+    "Vil du helst bo...",
+    ("Et fast sted i Reykjavik", "Flere steder på Island")
+)
 
 st.write("Hvad kunne du tænke dig at opleve?")
 # Add checkboxes for activities or sights
@@ -61,10 +66,15 @@ activity_options = {
     "Hesteridning": st.checkbox("Hesteridning - Oplev landskabet på ryggen af en islandsk hest"),
     "Besøg Vandfald": st.checkbox("Besøg Vandfald som Seljalandsfoss og Skógafoss")
 }
+
+st.write("")
+
+
+
 # Generate a prompt based on the selected options
 selected_activities = [activity for activity, selected in activity_options.items() if selected]
 activities_str = ", ".join(selected_activities)
-prompt_base = f"planlæg en {vacation_duration}-dags rejse til Island, der inkluderer følgende aktiviteter {activities_str}. Husk at tage højde for antallet af aktiviteter er realistisk i forhold til rejselængden. Du skal skrive som om det er mig, Sebastian, der skriver til min kæreste Cecilie. Kom med forslag til hvilket tøj der skal pakkes. Der er en bil til rådighed alle dagene. Det er vigtigt at du tager højde for at, der er en baby, Walther, på 6 måneder med på rejsen. Det betyder at du skal angive et tidsestimat på køretid og foreslå eventuelle stop undervejs. Du skal også komme med eksempler på overnatningssteder, hvor mange nætter vi skal være på hvert hotel og et link til booking. Dan et kort over ruten. "
+prompt_base = f"planlæg en {vacation_duration}-dags rejse til Island, der inkluderer følgende aktiviteter {activities_str} og som tager højde for ønsket bo {accommodation_choice}. Husk at tage højde for antallet af aktiviteter er realistisk i forhold til rejselængden. Du skal skrive som om det er mig, Sebastian, der skriver til min kæreste Cecilie. Kom med forslag til hvilket tøj der skal pakkes. Der er en bil til rådighed alle dagene. Det er vigtigt at du tager højde for at, der er en baby, Walther, på 6 måneder med på rejsen. Det betyder at du skal angive et tidsestimat på køretid og foreslå eventuelle stop undervejs. Du skal også komme med eksempler på overnatningssteder, hvor mange nætter vi skal være på hvert hotel og et link til booking. Dan et kort over ruten. "
 
 
 class StreamHandler(BaseCallbackHandler):
