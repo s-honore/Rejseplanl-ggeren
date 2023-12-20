@@ -2,4 +2,4 @@ langchain
 streamlit
 python-dotenv
 openai
-os
+os-sys
